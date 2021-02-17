@@ -10,9 +10,101 @@ I have personally found the method of measuring the error outlined by
 inaccuracy. For that reason, at least for XY skew, I am working on a new method
 of calculating error that requires only a printed object and calipers.
 
+# Installation
+
+Pre-compiled binaries for 64bit Windows, Linux, and OSX, can be found in [releases](https://github.com/Kranex/goskew/releases).
+Just grab the one you need and run it directly on the command line.
+
+If a release is not available for your system, or you just want to build it yourself, this can be done in one of two ways.
+First of all you will need to [install Go](https://golang.org/doc/install) and make sure that it is added to your system path.
+
+Then you can run:
+
+```
+$ go install github.com/kranex/goskew
+$ goskew --help
+```
+
+Which will fetch and build this repo and add it to your `GOPATH`. It can then be executed from anywhere like a normal command.
+
+Or you can clone and build the repo manually:
+
+```
+$ git clone https://github.com/Kranex/goskew.git
+$ cd goskew
+$ go build .
+$ ./goskew --help
+```
+
+# Skew Calculation
+
+TODO: Explain how this works and add diagrams.
+
+Print the caliangle calibration triangle found in docs. Make sure that a side is aligned to an axis, Perferably the X axis. the triangle should also be exactly 100mm wide, if you print it at a different size, remember to specify this with the `--ref` option.
+
+Measure each of the sides using callipers or any other accurate method. The base is whichever side is aligned to an axis. You ideally want as many significant figures as possible.
+
+For example, my calitriangle measured 99.69, 110.10, and 99.15.
+
+The command can then be structured like this:
+
+```
+goskew tri 99.69 110.10 99.15 -o caliangle-skewed.gcode caliangle.gcode
+```
+
+Print the skewed gcode and measure the sides again. The triangle should now be equilateral or at least the left and right sides should be equal.
+
+If all sides are equal, but not equal to 100mm, then you either need to apply some xy scaling in your slicer or up your extrusion
+multiplier. If the left and right are equal but the base is not, then you need to scale the y axis (if the base is aligned to the x axis). Either way your printer is no longer skewed.
+
+# Usage
+
+Go Skew has two main commands:
+
+```
+# xy, xz, and yz are xytan, xztan, and yztan respectively, if you don't need one, put in 0.
+goskew err <xy> <xz> <yz> [--output=FILE] <file>
+
+# base, left, and right are the lengths of the respective sides of the printed caliangle in milimeters.
+goskew tri <base> <left> <right> [--xz=ERROR --yz=ERROR --ref=LENGTH --output=FILE] <file>
+
+```
+
+If you already know the error in your axis, you can give xytan, xztan, and yztan with the `err` command.
+
+Alternatively if you have followed my method using the caliangle calibration triangle, you can give the side lengths
+of your printed caliangle with the `tri` command. the additional xz and yz errors cannot be calculated with a caliangle,
+but can be given with the optional `--xz` and `--yz` arguments. Additionally, if you have printed a caliangle with an expected
+base length other than `100mm`, this length can be supplied with `--ref`.
+
+Both commands can be given an output file with `--output`, if not given Go Skew will overwrite the source file.
+
+# Automatic skewing with Slic3r and PrusaSlicer
+
+NOTE: In PrusaSlicer you will need to be in Expert mode.
+
+First download or build Go Skew, then add the path to the binary and the arguments to Print Settings -> Output Options -> Post-processing scripts:
+
+![post-processing example](docs/post-processing.png)
+
+Common paths include:
+
+```
+# when installed on windows using go get/install
+C:/Users/[USER]/go/bin/goskew.exe
+
+# another windows install location 
+"C:/Program Files/go/bin/goskew.exe"
+
+# most *nix distrobutions
+${HOME}/go/bin/goskew
+```
+
+Do not give the `--output` option, it is a requirement that scripts overwrite the source file.
+
 # TODO
 
 - ~Add docopt~
 - ~Add skew code~
-- ~Add and~ test triangle error measurement
+- ~Add and test triangle error measurement~
 - Write an awesome readme
