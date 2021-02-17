@@ -12,7 +12,7 @@ of calculating error that requires only a printed object and calipers.
 
 # TODO
 
-- Add docopt's
-- Add skew code
-- Add and test triangle error measurement
+- ~Add docopt~
+- ~Add skew code~
+- ~Add and~ test triangle error measurement
 - Write an awesome readme
