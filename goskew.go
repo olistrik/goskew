@@ -88,7 +88,7 @@ Usage:
   %basename% tri <base> <left> <right> [--xz=ERROR --yz=ERROR --ref=LENGTH --output=FILE] [<file>]
   %basename% -h | --help
 
-Options:	
+Options:
   -o FILE, --output=FILE    The file name to write out to, by default Go Skew overwrites the original file. 
   --xz=ERROR                The error tangent in the XZ axis.
   --yz=ERROR                The error tangent in the YZ axis.       
@@ -100,7 +100,7 @@ Options:
 	usage = strings.ReplaceAll(usage, "%basename%", basename)
 
 	opts, _ := docopt.ParseDoc(usage)
-	//fmt.Println(opts)
+	// fmt.Println(opts)
 
 	// The tan error in all planes
 	xy, xz, yz := 0.0, 0.0, 0.0
