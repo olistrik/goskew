@@ -58,7 +58,7 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 		gmatch, _ := regexp.MatchString(`G[0-1]`, line)
 
 		if gmatch {
-			fmt.Printf("G0/1 on line %d\n", i)
+			fmt.Printf(".")
 
 			// find X, Y, and Y coords in line
 			getCoord(&xin, xreg, line)
@@ -76,7 +76,7 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 			lines[i] = line
 		}
 	}
-
+	fmt.Printf("\n")
 	return strings.Join(lines, "\n")
 }
 
@@ -149,7 +149,7 @@ Options:
 		log.Fatalln(err)
 	}
 
-	fmt.Printf("skewing...")
+	fmt.Printf("skewing")
 
 	output := skew(input, xy, xz, yz)
 
@@ -158,4 +158,6 @@ Options:
 	if err != nil {
 		log.Fatalln(err)
 	}
+
+	fmt.Println("Done!")
 }
