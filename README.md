@@ -66,7 +66,9 @@ Go Skew has two main commands:
 goskew err <xy> <xz> <yz> [--output=FILE] <file>
 
 # base, left, and right are the lengths of the respective sides of the printed caliangle in milimeters.
-goskew tri <base> <left> <right> [--xz=ERROR --yz=ERROR --ref=LENGTH --output=FILE] <file>
+# If file is left out, the xytan is calculated and printed. This can then be with the err command so that
+# it doesn't need to be calculated every time.
+goskew tri <base> <left> <right> [--xz=ERROR --yz=ERROR --ref=LENGTH --output=FILE] [<file>]
 
 ```
 
