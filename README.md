@@ -96,7 +96,7 @@ C:/Users/[USER]/go/bin/goskew.exe
 # another windows install location 
 "C:/Program Files/go/bin/goskew.exe"
 
-# most *nix distrobutions
+# most *nix distributions
 ${HOME}/go/bin/goskew
 ```
 
