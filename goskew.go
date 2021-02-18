@@ -85,10 +85,10 @@ func main() {
 
 Usage:
   %basename% err <xy> <xz> <yz> [--output=FILE] <file>
-  %basename% tri <base> <left> <right> [--xz=ERROR --yz=ERROR --ref=LENGTH --output=FILE] <file>
+  %basename% tri <base> <left> <right> [--xz=ERROR --yz=ERROR --ref=LENGTH --output=FILE] [<file>]
   %basename% -h | --help
 
-Options:
+Options:	
   -o FILE, --output=FILE    The file name to write out to, by default Go Skew overwrites the original file. 
   --xz=ERROR                The error tangent in the XZ axis.
   --yz=ERROR                The error tangent in the YZ axis.       
@@ -100,7 +100,7 @@ Options:
 	usage = strings.ReplaceAll(usage, "%basename%", basename)
 
 	opts, _ := docopt.ParseDoc(usage)
-	// fmt.Println(opts)
+	//fmt.Println(opts)
 
 	// The tan error in all planes
 	xy, xz, yz := 0.0, 0.0, 0.0
@@ -109,7 +109,7 @@ Options:
 	triangle, _ := opts.Bool("tri")
 
 	if triangle {
-		fmt.Println("calculating xyerr from given triangle")
+		fmt.Println("calculating xytan from given triangle")
 		// extract options
 		ref, _ := opts.Float64("--ref")
 		base, _ := opts.Float64("<base>")
@@ -134,10 +134,14 @@ Options:
 		yz, _ = opts.Float64("<yz>")
 	}
 
-	fmt.Printf("Skew gradients:\nxy: %0.5f, xz: %0.5f, yz: %0.5f\n", xy, xz, yz)
+	fmt.Printf("Error tangents:\nxytan: %0.7f, xztan: %0.7f, yztan: %0.7f\n", xy, xz, yz)
 
 	iFile, _ := opts.String("<file>")
 	oFile, _ := opts.String("--output")
+
+	if iFile == "" {
+		return
+	}
 
 	if oFile == "" {
 		oFile = iFile
