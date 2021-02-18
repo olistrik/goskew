@@ -134,7 +134,7 @@ Options:
 		yz, _ = opts.Float64("<yz>")
 	}
 
-	fmt.Printf("errors:\nxy: %0.5f, xz: %0.5f, yz: %0.5f\n", xy, xz, yz)
+	fmt.Printf("Skew gradients:\nxy: %0.5f, xz: %0.5f, yz: %0.5f\n", xy, xz, yz)
 
 	iFile, _ := opts.String("<file>")
 	oFile, _ := opts.String("--output")
