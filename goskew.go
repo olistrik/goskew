@@ -18,9 +18,9 @@ func sq(val float64) float64 {
 	return val * val
 }
 
-func triangleError(base float64, left float64, right float64, ref float64) float64 {
+func triangleError(base float64, left float64, right float64) float64 {
 	// calclate the height of the reference equilateral
-	height := math.Sin(math.Pi/3) * ref
+	height := math.Sin(math.Pi/3) * 1000
 
 	// calculate the left angle of the printed triangle
 	alpha := math.Acos((sq(left) + sq(base) - sq(right)) / (2 * left * base))
@@ -29,7 +29,7 @@ func triangleError(base float64, left float64, right float64, ref float64) float
 	delta := height / math.Tan(alpha)
 
 	// calculate the error in x.
-	xerr := delta - ref/2
+	xerr := delta - 1000/2
 
 	// return the xytan error.
 	return xerr / height
@@ -85,14 +85,13 @@ func main() {
 
 Usage:
   %basename% err <xy> <xz> <yz> [--output=FILE] <file>
-  %basename% tri <base> <left> <right> [--xz=ERROR --yz=ERROR --ref=LENGTH --output=FILE] [<file>]
+  %basename% tri <base> <left> <right> [--xz=ERROR --yz=ERROR --output=FILE] [<file>]
   %basename% -h | --help
 
 Options:
   -o FILE, --output=FILE    The file name to write out to, by default Go Skew overwrites the original file. 
   --xz=ERROR                The error tangent in the XZ axis.
   --yz=ERROR                The error tangent in the YZ axis.       
-  -r LENGTH, --ref=LENGTH   The side length of the reference equilateral triangle in millimeters. 100 by default.
   -h, --help
 `
 	basename := filepath.Base(os.Args[0])
@@ -111,18 +110,12 @@ Options:
 	if triangle {
 		fmt.Println("calculating xytan from given triangle")
 		// extract options
-		ref, _ := opts.Float64("--ref")
 		base, _ := opts.Float64("<base>")
 		left, _ := opts.Float64("<left>")
 		right, _ := opts.Float64("<right>")
 
-		// ref is 100mm by default
-		if ref == 0 {
-			ref = 100
-		}
-
 		// calculate the xytan
-		xy = triangleError(base, left, right, ref)
+		xy = triangleError(base, left, right)
 
 		// get the xz and yz errors if given
 		xz, _ = opts.Float64("--xz")
