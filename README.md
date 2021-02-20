@@ -40,7 +40,7 @@ $ ./goskew --help
 
 TODO: Explain how this works and add diagrams.
 
-Print the caliangle calibration triangle found in docs. Make sure that a side is aligned to an axis, Perferably the X axis. the triangle should also be exactly 100mm wide, if you print it at a different size, remember to specify this with the `--ref` option.
+Print the caliangle calibration triangle found in docs. Make sure that a side is aligned to an axis, Perferably the X axis. You can print the triangle at whatever size you like, the bigger the better. 
 
 Measure each of the sides using callipers or any other accurate method. The base is whichever side is aligned to an axis. You ideally want as many significant figures as possible.
 
@@ -68,7 +68,7 @@ goskew err <xy> <xz> <yz> [--output=FILE] <file>
 # base, left, and right are the lengths of the respective sides of the printed caliangle in milimeters.
 # If file is left out, the xytan is calculated and printed. This can then be with the err command so that
 # it doesn't need to be calculated every time.
-goskew tri <base> <left> <right> [--xz=ERROR --yz=ERROR --ref=LENGTH --output=FILE] [<file>]
+goskew tri <base> <left> <right> [--xz=ERROR --yz=ERROR --output=FILE] [<file>]
 
 ```
 
@@ -76,9 +76,7 @@ If you already know the error in your axis, you can give xytan, xztan, and yztan
 
 Alternatively if you have followed my method using the caliangle calibration triangle, you can give the side lengths
 of your printed caliangle with the `tri` command. the additional xz and yz errors cannot be calculated with a caliangle,
-but can be given with the optional `--xz` and `--yz` arguments. Additionally, if you have printed a caliangle with an expected
-base length other than `100mm`, this length can be supplied with `--ref`.
-
+but can be given with the optional `--xz` and `--yz` arguments.
 Both commands can be given an output file with `--output`, if not given Go Skew will overwrite the source file.
 
 # Automatic skewing with Slic3r and PrusaSlicer
