@@ -12,6 +12,7 @@ import (
 	"strings"
 
 	"github.com/docopt/docopt-go"
+	"github.com/schollz/progressbar"
 )
 
 func sq(val float64) float64 {
@@ -46,6 +47,9 @@ func getCoord(in *float64, reg *regexp.Regexp, line string) {
 func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 	lines := strings.Split(string(input), "\n")
 
+	progress := progressbar.New(len(lines))
+	progress.SetWriter(os.Stderr)
+
 	// init the coords
 	xin, yin, zin := 0.0, 0.0, 0.0
 
@@ -58,8 +62,6 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 		gmatch, _ := regexp.MatchString(`G[0-1]`, line)
 
 		if gmatch {
-			fmt.Printf(".")
-
 			// find X, Y, and Y coords in line
 			getCoord(&xin, xreg, line)
 			getCoord(&yin, yreg, line)
@@ -75,6 +77,7 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 
 			lines[i] = line
 		}
+		progress.Add(1)
 	}
 	fmt.Printf("\n")
 	return strings.Join(lines, "\n")
