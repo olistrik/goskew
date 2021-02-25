@@ -2,6 +2,10 @@ name: pre-release
 
 on:
   push:
+    tags-ignore:
+      - "v*"
+    paths-ignore:
+      - "README.md"
     branches:
       - "main"
 
