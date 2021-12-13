@@ -87,14 +87,15 @@ func main() {
 	usage := `Go Skew.
 
 Usage:
-  %basename% err <xy> <xz> <yz> [--output=FILE] <file>
-  %basename% tri <base> <left> <right> [--xz=ERROR --yz=ERROR --output=FILE] [<file>]
+  %basename% err (--xy=<xy> | <xy>) (--xz=<xz> | <xz>) (--yz=<yz> | <yz>) [--output=FILE] <file>
+  %basename% tri <base> <left> <right> [--xz=<xz> --yz=<yz> --output=FILE] [<file>]
   %basename% -h | --help
 
 Options:
-  -o FILE, --output=FILE    The file name to write out to, by default Go Skew overwrites the original file. 
+  -o FILE, --output=FILE    The file name to write out to, by default Go Skew overwrites the original file.
+  --xy=ERROR                The error tangent in the XY axis.
   --xz=ERROR                The error tangent in the XZ axis.
-  --yz=ERROR                The error tangent in the YZ axis.       
+  --yz=ERROR                The error tangent in the YZ axis.
   -h, --help
 `
 	basename := filepath.Base(os.Args[0])
@@ -124,10 +125,22 @@ Options:
 		xz, _ = opts.Float64("--xz")
 		yz, _ = opts.Float64("--yz")
 	} else {
+		var err error
 		// get the tan errors.
-		xy, _ = opts.Float64("<xy>")
-		xz, _ = opts.Float64("<xz>")
-		yz, _ = opts.Float64("<yz>")
+		xy, err = opts.Float64("<xy>")
+		if err != nil {
+			xy, _ = opts.Float64("--xy")
+		}
+
+		xz, err = opts.Float64("<xz>")
+		if err != nil {
+			xz, _ = opts.Float64("--xz")
+		}
+
+		yz, err = opts.Float64("<yz>")
+		if err != nil {
+			yz, _ = opts.Float64("--yz")
+		}
 	}
 
 	fmt.Printf("Error tangents:\nxytan: %0.7f, xztan: %0.7f, yztan: %0.7f\n", xy, xz, yz)
