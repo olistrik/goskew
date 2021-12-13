@@ -63,6 +63,8 @@ Go Skew has two main commands:
 
 ```
 # xy, xz, and yz are xytan, xztan, and yztan respectively, if you don't need one, put in 0.
+# If you require a negative tan value, you can give it with the --xy=ERROR arguments to avoid the minus being read
+# as a flag.
 goskew err <xy> <xz> <yz> [--output=FILE] <file>
 
 # base, left, and right are the lengths of the respective sides of the printed caliangle in milimeters.
