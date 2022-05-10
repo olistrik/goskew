@@ -38,6 +38,20 @@ $ ./goskew --help
 
 # Skew Calculation
 
+## Using [kranex.github.io/skew-it](https://kranex.github.io/skew-it/)
+
+[Skew It](https://kranex.github.io/skew-it/) is an online calculator for calculating error tangent values using a test print.
+
+1. Print the Skew It test print. The larger the better but keep in mind you will need to be able to reliably measure the diagonals of the cube.
+2. Measure the labeled diagonals in each plane you wish to calibrate. the cube has more labels than the calculator for future improvements.
+3. Fill in the calculator, and use the resultant output in the command:
+
+```
+goskew err --xy=XYTAN --xz=XZTAN --yz=YZTAN
+```
+
+
+## Using the calitriangle.stl (Only for XY plane)
 TODO: Explain how this works and add diagrams.
 
 Print the caliangle calibration triangle found in docs. Make sure that a side is aligned to an axis, Perferably the X axis. You can print the triangle at whatever size you like, the bigger the better. 
