@@ -54,9 +54,9 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 	xin, yin, zin := 0.0, 0.0, 0.0
 
 	// init the regular expressions
-	xreg, _ := regexp.Compile(`[xX](-?\d*\.\d*)`)
-	yreg, _ := regexp.Compile(`[yY](-?\d*\.\d*)`)
-	zreg, _ := regexp.Compile(`[zZ](-?\d*\.\d*)`)
+	xreg, _ := regexp.Compile(`[xX](-?\d*\.?\d*)`)
+	yreg, _ := regexp.Compile(`[yY](-?\d*\.?\d*)`)
+	zreg, _ := regexp.Compile(`[zZ](-?\d*\.?\d*)`)
 
 	for i, line := range lines {
 		gmatch, _ := regexp.MatchString(`G[0-1]`, line)
