@@ -59,7 +59,7 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 	zreg, _ := regexp.Compile(`[zZ](-?\d*\.?\d*)`)
 
 	for i, line := range lines {
-		gmatch, _ := regexp.MatchString(`G[0-1]`, line)
+		gmatch, _ := regexp.MatchString(`^\s*G[0-1]`, line)
 
 		if gmatch {
 			// find X, Y, and Y coords in line
