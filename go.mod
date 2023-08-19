@@ -1,4 +1,4 @@
-module github.com/kranex/goskew
+module github.com/olistrik/goskew
 
 go 1.16
 
