@@ -21,7 +21,7 @@ First of all you will need to [install Go](https://golang.org/doc/install) and m
 Then you can run:
 
 ```
-$ go install github.com/kranex/goskew
+$ go install github.com/olistrik/goskew
 $ goskew --help
 ```
 
@@ -38,9 +38,9 @@ $ ./goskew --help
 
 # Skew Calculation
 
-## Using [kranex.github.io/skew-it](https://kranex.github.io/skew-it/)
+## Using [olistrik.github.io/skew-it](https://olistrik.github.io/skew-it/)
 
-[Skew It](https://kranex.github.io/skew-it/) is an online calculator for calculating error tangent values using a test print.
+[Skew It](https://olistrik.github.io/skew-it/) is an online calculator for calculating error tangent values using a test print.
 
 1. Print the Skew It test print. The larger the better but keep in mind you will need to be able to reliably measure the diagonals of the cube.
 2. Measure the labeled diagonals in each plane you wish to calibrate. the cube has more labels than the calculator for future improvements.
