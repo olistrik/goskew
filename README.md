@@ -106,11 +106,14 @@ Both commands can be given an output file with `--output`, if not given Go Skew 
 
 > [!WARNING]
 > Recient versions of PrusaSlicer have begun optimizing arcs and circles with G2/3 commands. GoSkew doesn't support these.
+>
 > You can disable this option under `Print Settings -> Advanced -> (Slicing) Arc fitting`.
 
 > [!WARNING]
-> Recient versions of PrusaSlicer have started exporting binary g-code if the target printer supports it. GoSkew doesn't support this. 
+> Recient versions of PrusaSlicer have started exporting binary g-code if the target printer supports it. GoSkew doesn't support this.
+>
 > You can disable this for a specific printer in `Printer Settings -> General -> (Firmware) Support binary G-code`
+>
 > You can disable it for all printers globally in `Configuration -> Preferences -> Other -> Use binary G-code when the printer supports it`.
 
 First download or build Go Skew, then add the path to the binary and the arguments to Print Settings -> Output Options -> Post-processing scripts:
