@@ -73,6 +73,10 @@ multiplier. If the left and right are equal but the base is not, then you need t
 
 # Usage
 
+> [!WARNING]
+> GoSkew only supports skewing linear moves (G0 & G1). If your gcode contains arcs (G2 & G3), they will be left unskewed.
+> If you know of a way to skew arcs, let me know.
+
 Go Skew has two main commands:
 
 ```
@@ -97,7 +101,17 @@ Both commands can be given an output file with `--output`, if not given Go Skew 
 
 # Automatic skewing with Slic3r and PrusaSlicer
 
-NOTE: In PrusaSlicer you will need to be in Expert mode.
+> [!NOTE] 
+> In PrusaSlicer you will need to be in Expert mode.
+
+> [!WARNING]
+> Recient versions of PrusaSlicer have begun optimizing arcs and circles with G2/3 commands. GoSkew doesn't support these.
+> You can disable this option under `Print Settings -> Advanced -> (Slicing) Arc fitting`.
+
+> [!WARNING]
+> Recient versions of PrusaSlicer have started exporting binary g-code if the target printer supports it. GoSkew doesn't support this. 
+> You can disable this for a specific printer in `Printer Settings -> General -> (Firmware) Support binary G-code`
+> You can disable it for all printers globally in `Configuration -> Preferences -> Other -> Use binary G-code when the printer supports it`.
 
 First download or build Go Skew, then add the path to the binary and the arguments to Print Settings -> Output Options -> Post-processing scripts:
 
