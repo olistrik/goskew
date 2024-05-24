@@ -1,3 +1,8 @@
+// Copyright 2021 Oliver Strik
+// This project includes code derived from gSkewer (https://github.com/MechanizedMedic/gskewer),
+// which is licensed under the GNU General Public License version 3.0 (GPLv3).
+// For the terms of the GPLv3 license, please see the LICENSE file included in this distribution.
+
 package main
 
 import (

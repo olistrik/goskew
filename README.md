@@ -10,6 +10,20 @@ I have personally found the method of measuring the error outlined by
 inaccuracy. For that reason, at least for XY skew, I am working on a new method
 of calculating error that requires only a printed object and calipers.
 
+# License
+
+> [!NOTE]
+> Up until and including version 1.4.0 this project was mislicensed under the MIT license. 
+> 
+> As a derivative work of an GPLv3 project this was not allowed. From version 1.5.0 this project has
+> been re-licensed under the correct GPLv3 license. 
+
+This project includes code derived from [gSkewer](https://github.com/MechanizedMedic/gskewer),
+which is licensed under the GNU General Public License version 3.0 (GPLv3). As such, this project
+is also licensed under the GNU GPLv3.
+
+[Link to GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
+
 # Installation
 
 Pre-compiled binaries for 64bit Windows, Linux, and OSX, can be found in [releases](https://github.com/Kranex/goskew/releases).
@@ -99,7 +113,7 @@ of your printed caliangle with the `tri` command. the additional xz and yz error
 but can be given with the optional `--xz` and `--yz` arguments.
 Both commands can be given an output file with `--output`, if not given Go Skew will overwrite the source file.
 
-# Automatic skewing with Slic3r and PrusaSlicer
+## Automatic skewing with Slic3r and PrusaSlicer
 
 > [!NOTE] 
 > In PrusaSlicer you will need to be in Expert mode.
@@ -135,9 +149,3 @@ ${HOME}/go/bin/goskew
 
 Do not give the `--output` option, it is a requirement that scripts overwrite the source file.
 
-# TODO
-
-- ~Add docopt~
-- ~Add skew code~
-- ~Add and test triangle error measurement~
-- Write an awesome readme
