@@ -7,7 +7,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"math"
 	"os"
@@ -161,7 +160,7 @@ Options:
 		oFile = iFile
 	}
 
-	input, err := ioutil.ReadFile(iFile)
+	input, err := os.ReadFile(iFile)
 
 	if err != nil {
 		log.Fatalln(err)
@@ -171,7 +170,7 @@ Options:
 
 	output := skew(input, xy, xz, yz)
 
-	err = ioutil.WriteFile(oFile, []byte(output), 0644)
+	err = os.WriteFile(oFile, []byte(output), 0644)
 
 	if err != nil {
 		log.Fatalln(err)
