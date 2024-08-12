@@ -50,6 +50,27 @@ $ go build .
 $ ./goskew --help
 ```
 
+
+## Nix and NixOS
+
+Alternatively for nix users, this repository exports both a package and an
+overlay via flakes. 
+
+This means all of the following commands can be used if you have flake support
+enabled:
+
+```
+$ nix profile install "github:olistrik/goskew"
+$ nix build "github:olistrik/goskew"
+$ nix shell "github:olistrik/goskew"
+$ nix run "github:olistrik/goskew" -- --help
+```
+
+You can also use the exported `overlays.default` in every way you might expect.
+
+I don't plan on getting goskew added to nixpkgs, nor do I plan on adding
+compatibility support for flakeless usage.
+
 # Skew Calculation
 
 ## Using [olistrik.github.io/skew-it](https://olistrik.github.io/skew-it/)
