@@ -16,3 +16,13 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Build output
+result
+
+# Local Development
+.local/*
+.direnv/*
+.env
+.envrc
+
