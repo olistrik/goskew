@@ -61,11 +61,13 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 	xreg, _ := regexp.Compile(`[xX](-?\d*\.?\d*)`)
 	yreg, _ := regexp.Compile(`[yY](-?\d*\.?\d*)`)
 	zreg, _ := regexp.Compile(`[zZ](-?\d*\.?\d*)`)
+	g01, _ := regexp.Compile(`^\s*G[0-1]`)
+	cmd, _ := regexp.Compile(`^\s*;\s*goskew\s+([^\s;]+).*$`)
+
+	enabled := true
 
 	for i, line := range lines {
-		gmatch, _ := regexp.MatchString(`^\s*G[0-1]`, line)
-
-		if gmatch {
+		if enabled && g01.MatchString(line) {
 			// find X, Y, and Y coords in line
 			getCoord(&xin, xreg, line)
 			getCoord(&yin, yreg, line)
@@ -81,6 +83,21 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 
 			lines[i] = line
 		}
+
+		cmatches := cmd.FindStringSubmatch(strings.ToLower(line))
+		if len(cmatches) > 1 {
+			switch cmatches[1] {
+			case "on":
+				enabled = true
+			case "enable":
+				enabled = true
+			case "off":
+				enabled = false
+			case "disable":
+				enabled = false
+			}
+		}
+
 		progress.Add(1)
 	}
 	fmt.Printf("\n")

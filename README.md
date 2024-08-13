@@ -170,3 +170,24 @@ ${HOME}/go/bin/goskew
 
 Do not give the `--output` option, it is a requirement that scripts overwrite the source file.
 
+## Partial Skewing
+
+In somecases it may be desirable to disable the skewing of gcode, for example for tool changes and filament purges.
+To this end, GoSkew accepts commands in the form of comments to enable and disable skewing:
+
+```gcode
+G1 X1 Y1
+;goskew disable
+G1 X2 X2
+G1 X3 X3
+;goskew enable
+G1 X4 X4
+```
+
+In the above example all the lines between the disable and enable comments will not be skewed.
+
+GoSkew accepts `enable`, `disable`, `on`, and `off` as commands. GoSkew
+comments must be on their own line, inline comments and invalid commands will
+be ignored.
+
+You can add these comments to your slicers custom gcode as necessary.
