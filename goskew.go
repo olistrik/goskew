@@ -68,6 +68,13 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 
 	for i, line := range lines {
 		if enabled && g01.MatchString(line) {
+			//strip inline comments
+			comment := ""
+			if idx := strings.Index(line, ";"); idx != -1 {
+				comment = line[idx:]
+				line = line[:idx]
+			}
+
 			// find X, Y, and Y coords in line
 			getCoord(&xin, xreg, line)
 			getCoord(&yin, yreg, line)
@@ -80,6 +87,11 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 			// replace the X and Y coords
 			line = xreg.ReplaceAllString(line, "X"+xout)
 			line = yreg.ReplaceAllString(line, "Y"+yout)
+
+			// append stripped comments
+			if comment != "" {
+				line = line + comment
+			}
 
 			lines[i] = line
 		}
