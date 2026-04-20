@@ -61,7 +61,7 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 	xreg, _ := regexp.Compile(`[xX]([+-]?\d*\.?\d*)`)
 	yreg, _ := regexp.Compile(`[yY]([+-]?\d*\.?\d*)`)
 	zreg, _ := regexp.Compile(`[zZ]([+-]?\d*\.?\d*)`)
-	g01, _ := regexp.Compile(`^\s*G[0-1]`)
+	g01, _ := regexp.Compile(`^\s*G\s*[0-1]`)
 	cmd, _ := regexp.Compile(`^\s*;\s*goskew\s+([^\s;]+).*$`)
 
 	enabled := true
@@ -74,6 +74,10 @@ func skew(input []byte, xytan float64, xztan float64, yztan float64) string {
 				comment = line[idx:]
 				line = line[:idx]
 			}
+
+			// GCode allows tabs and spaces anywhere in a line, so we'll strip them.
+			line = strings.ReplaceAll(line, " ", "")
+			line = strings.ReplaceAll(line, "\t", "")
 
 			// find X, Y, and Y coords in line
 			getCoord(&xin, xreg, line)
